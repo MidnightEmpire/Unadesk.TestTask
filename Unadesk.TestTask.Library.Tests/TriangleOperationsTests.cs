@@ -11,13 +11,82 @@ public class TriangleOperationsTests
 {
     /// <summary>
     /// <see cref="TriangleOperations.GetTriangleKind(double, double, double, double)" />
+    /// for incorrect sides and/or precision checking method.
+    /// </summary>
+    /// <param name="side1">Triangle first side length value.</param>
+    /// <param name="side2">Triangle second side length value.</param>
+    /// <param name="side3">Triangle third side length value.</param>
+    /// <param name="precision">Triangle kind checking precision value.</param>
+    [Theory]
+    [InlineData(-0.5, 0.5, 0.5, 1E-4)]
+    [InlineData(0.5, -0.5, 0.5, 1E-4)]
+    [InlineData(0.5, 0.5, -0.5, 1E-4)]
+    [InlineData(0.0, 0.0, 0.0, 1E-4)]
+    [InlineData(100.0, 100.0, 0.0, 1E-4)]
+    [InlineData(0.0, 100.0, 100.0, 1E-4)]
+    [InlineData(100.0, 0.0, 100.0, 1E-4)]
+    [InlineData(2.0, 2.0, 2.0, -1.0)]
+    [InlineData(2.0, -2.0, 2.0, -1.0)]
+    public void GetTriangleKind_Double_WhenTriangleSidesAndPrecisionAreIncorrectOnes_ThrowsArgumentOutOfRangeException(
+        double side1,
+        double side2,
+        double side3,
+        double precision
+    ) {
+        var exception = Record.Exception(
+            () => TriangleOperations.GetTriangleKind(
+                side1,
+                side2,
+                side3,
+                precision
+            )
+        );
+
+        Assert.IsType<ArgumentOutOfRangeException>(exception);
+    }
+
+    /// <summary>
+    /// <see cref="TriangleOperations.GetTriangleKind(double, double, double, double)" />
+    /// for non-matched triangle inequality sides checking method.
+    /// </summary>
+    /// <param name="side1">Triangle first side length value.</param>
+    /// <param name="side2">Triangle second side length value.</param>
+    /// <param name="side3">Triangle third side length value.</param>
+    /// <param name="precision">Triangle kind checking precision value.</param>
+    [Theory]
+    [InlineData(15.5, 2.1, 1.9, 1E-4)]
+    [InlineData(15.5, 1.9, 2.1, 1E-4)]
+    [InlineData(1.9, 15.5, 2.1, 1E-4)]
+    [InlineData(1.9, 2.1, 15.5, 1E-4)]
+    [InlineData(2.1, 1.9, 15.5, 1E-4)]
+    [InlineData(2.1, 15.5, 1.9, 1E-4)]
+    public void GetTriangleKind_Double_WhenTriangleInequalityIsNotMatched_ThrowsInvalidOperationException(
+        double side1,
+        double side2,
+        double side3,
+        double precision
+    ) {
+        var exception = Record.Exception(
+            () => TriangleOperations.GetTriangleKind(
+                side1,
+                side2,
+                side3,
+                precision
+            )
+        );
+
+        Assert.IsType<InvalidOperationException>(exception);
+    }
+
+    /// <summary>
+    /// <see cref="TriangleOperations.GetTriangleKind(double, double, double, double)" />
     /// for correct sides and precision checking method.
     /// </summary>
-    /// <param name="side1">Triangular first side length value.</param>
-    /// <param name="side2">Triangular second side length value.</param>
-    /// <param name="side3">Triangular third side length value.</param>
-    /// <param name="precision">Triangular kind checking precision value.</param>
-    /// <param name="expectedKind">Triangular expected kind value.</param>
+    /// <param name="side1">Triangle first side length value.</param>
+    /// <param name="side2">Triangle second side length value.</param>
+    /// <param name="side3">Triangle third side length value.</param>
+    /// <param name="precision">Triangle kind checking precision value.</param>
+    /// <param name="expectedKind">Triangle expected kind value.</param>
     [Theory]
     [InlineData(0.5, 0.5, 0.5, 1E-4, TriangleKind.Acute)]
     [InlineData(5.4, 5.4, 5.4, 1E-4, TriangleKind.Acute)]
@@ -53,7 +122,7 @@ public class TriangleOperationsTests
     [InlineData(0.13, 0.12, 0.05, 1E-4, TriangleKind.Right)]
     [InlineData(0.05, 0.13, 0.12, 1E-4, TriangleKind.Right)]
     [InlineData(0.05, 0.12, 0.13, 1E-4, TriangleKind.Right)]
-    public void GetTriangleKind_Double_WhenTriangularSidesAndPrecisionAreCorrectOnes_ReturnCorrectKind(
+    public void GetTriangleKind_Double_WhenTriangleSidesAndPrecisionAreCorrectOnes_ReturnCorrectKind(
         double side1,
         double side2,
         double side3,
@@ -72,13 +141,92 @@ public class TriangleOperationsTests
 
     /// <summary>
     /// <see cref="TriangleOperations.GetTriangleKind(decimal, decimal, decimal, decimal)" />
+    /// for incorrect sides and/or precision checking method.
+    /// </summary>
+    /// <param name="side1String">Triangle first side length value.</param>
+    /// <param name="side2String">Triangle second side length value.</param>
+    /// <param name="side3String">Triangle third side length value.</param>
+    /// <param name="precisionString">Triangle kind checking precision value.</param>
+    [Theory]
+    [InlineData("-0.5", "0.5", "0.5", "0.0001")]
+    [InlineData("0.5", "-0.5", "0.5", "0.0001")]
+    [InlineData("0.5", "0.5", "-0.5", "0.0001")]
+    [InlineData("0.0", "0.0", "0.0", "0.0001")]
+    [InlineData("100.0", "100.0", "0.0", "0.0001")]
+    [InlineData("0.0", "100.0", "100.0", "0.0001")]
+    [InlineData("100.0", "0.0", "100.0", "0.0001")]
+    [InlineData("2.0", "2.0", "2.0", "-1.0")]
+    [InlineData("2.0", "-2.0", "2.0", "-1.0")]
+    public void GetTriangleKind_Decimal_WhenTriangleSidesAndPrecisionAreIncorrectOnes_ThrowsArgumentOutOfRangeException(
+        string side1String,
+        string side2String,
+        string side3String,
+        string precisionString
+    ) {
+        var side1 = Convert.ToDecimal(side1String, CultureInfo.InvariantCulture);
+        var side2 = Convert.ToDecimal(side2String, CultureInfo.InvariantCulture);
+        var side3 = Convert.ToDecimal(side3String, CultureInfo.InvariantCulture);
+        var precision = Convert.ToDecimal(precisionString, CultureInfo.InvariantCulture);
+
+        var exception = Record.Exception(
+            () => TriangleOperations.GetTriangleKind(
+                side1,
+                side2,
+                side3,
+                precision
+            )
+        );
+
+        Assert.IsType<ArgumentOutOfRangeException>(exception);
+    }
+
+    /// <summary>
+    /// <see cref="TriangleOperations.GetTriangleKind(decimal, decimal, decimal, decimal)" />
+    /// for non-matched triangle inequality sides checking method.
+    /// </summary>
+    /// <param name="side1String">Triangle first side length value.</param>
+    /// <param name="side2String">Triangle second side length value.</param>
+    /// <param name="side3String">Triangle third side length value.</param>
+    /// <param name="precisionString">Triangle kind checking precision value.</param>
+    [Theory]
+    [InlineData("15.5", "2.1", "1.9", "0.0001")]
+    [InlineData("15.5", "1.9", "2.1", "0.0001")]
+    [InlineData("1.9", "15.5", "2.1", "0.0001")]
+    [InlineData("1.9", "2.1", "15.5", "0.0001")]
+    [InlineData("2.1", "1.9", "15.5", "0.0001")]
+    [InlineData("2.1", "15.5", "1.9", "0.0001")]
+    public void GetTriangleKind_Decimal_WhenTriangleInequalityIsNotMatched_ThrowsInvalidOperationException(
+        string side1String,
+        string side2String,
+        string side3String,
+        string precisionString
+    ) {
+        var side1 = Convert.ToDecimal(side1String, CultureInfo.InvariantCulture);
+        var side2 = Convert.ToDecimal(side2String, CultureInfo.InvariantCulture);
+        var side3 = Convert.ToDecimal(side3String, CultureInfo.InvariantCulture);
+        var precision = Convert.ToDecimal(precisionString, CultureInfo.InvariantCulture);
+
+        var exception = Record.Exception(
+            () => TriangleOperations.GetTriangleKind(
+                side1,
+                side2,
+                side3,
+                precision
+            )
+        );
+
+        Assert.IsType<InvalidOperationException>(exception);
+    }
+
+    /// <summary>
+    /// <see cref="TriangleOperations.GetTriangleKind(decimal, decimal, decimal, decimal)" />
     /// for correct sides and precision checking method.
     /// </summary>
-    /// <param name="side1String">Triangular first side length value.</param>
-    /// <param name="side2String">Triangular second side length value.</param>
-    /// <param name="side3String">Triangular third side length value.</param>
-    /// <param name="precisionString">Triangular kind checking precision value.</param>
-    /// <param name="expectedKind">Triangular expected kind value.</param>
+    /// <param name="side1String">Triangle first side length value.</param>
+    /// <param name="side2String">Triangle second side length value.</param>
+    /// <param name="side3String">Triangle third side length value.</param>
+    /// <param name="precisionString">Triangle kind checking precision value.</param>
+    /// <param name="expectedKind">Triangle expected kind value.</param>
     [Theory]
     [InlineData("0.5", "0.5", "0.5", "0.0001", TriangleKind.Acute)]
     [InlineData("5.4", "5.4", "5.4", "0.0001", TriangleKind.Acute)]
@@ -114,7 +262,7 @@ public class TriangleOperationsTests
     [InlineData("0.13", "0.12", "0.05", "0.0001", TriangleKind.Right)]
     [InlineData("0.05", "0.13", "0.12", "0.0001", TriangleKind.Right)]
     [InlineData("0.05", "0.12", "0.13", "0.0001", TriangleKind.Right)]
-    public void GetTriangleKind_Decimal_WhenTriangularSidesAndPrecisionAreCorrectOnes_ReturnCorrectKind(
+    public void GetTriangleKind_Decimal_WhenTriangleSidesAndPrecisionAreCorrectOnes_ReturnCorrectKind(
         string side1String,
         string side2String,
         string side3String,
@@ -139,12 +287,73 @@ public class TriangleOperationsTests
 
     /// <summary>
     /// <see cref="TriangleOperations.GetTriangleKind(int, int, int)" />
+    /// for incorrect sides and/or precision checking method.
+    /// </summary>
+    /// <param name="side1">Triangle first side length value.</param>
+    /// <param name="side2">Triangle second side length value.</param>
+    /// <param name="side3">Triangle third side length value.</param>
+    [Theory]
+    [InlineData(-5, 5, 5)]
+    [InlineData(5, -5, 5)]
+    [InlineData(5, 5, -5)]
+    [InlineData(0, 0, 0)]
+    [InlineData(100, 100, 0)]
+    [InlineData(0, 100, 100)]
+    [InlineData(100, 0, 100)]
+    public void GetTriangleKind_Integer_WhenTriangleSidesAndPrecisionAreIncorrectOnes_ThrowsArgumentOutOfRangeException(
+        int side1,
+        int side2,
+        int side3
+    ) {
+        var exception = Record.Exception(
+            () => TriangleOperations.GetTriangleKind(
+                side1,
+                side2,
+                side3
+            )
+        );
+
+        Assert.IsType<ArgumentOutOfRangeException>(exception);
+    }
+
+    /// <summary>
+    /// <see cref="TriangleOperations.GetTriangleKind(int, int, int)" />
+    /// for non-matched triangle inequality sides checking method.
+    /// </summary>
+    /// <param name="side1">Triangle first side length value.</param>
+    /// <param name="side2">Triangle second side length value.</param>
+    /// <param name="side3">Triangle third side length value.</param>
+    [Theory]
+    [InlineData(15, 2, 1)]
+    [InlineData(15, 1, 2)]
+    [InlineData(1, 15, 2)]
+    [InlineData(1, 2, 15)]
+    [InlineData(2, 1, 15)]
+    [InlineData(2, 15, 1)]
+    public void GetTriangleKind_Integer_WhenTriangleInequalityIsNotMatched_ThrowsInvalidOperationException(
+        int side1,
+        int side2,
+        int side3
+    ) {
+        var exception = Record.Exception(
+            () => TriangleOperations.GetTriangleKind(
+                side1,
+                side2,
+                side3
+            )
+        );
+
+        Assert.IsType<InvalidOperationException>(exception);
+    }
+
+    /// <summary>
+    /// <see cref="TriangleOperations.GetTriangleKind(int, int, int)" />
     /// for correct sides and precision checking method.
     /// </summary>
-    /// <param name="side1">Triangular first side length value.</param>
-    /// <param name="side2">Triangular second side length value.</param>
-    /// <param name="side3">Triangular third side length value.</param>
-    /// <param name="expectedKind">Triangular expected kind value.</param>
+    /// <param name="side1">Triangle first side length value.</param>
+    /// <param name="side2">Triangle second side length value.</param>
+    /// <param name="side3">Triangle third side length value.</param>
+    /// <param name="expectedKind">Triangle expected kind value.</param>
     [Theory]
     [InlineData(1, 1, 1, TriangleKind.Acute)]
     [InlineData(5, 5, 5, TriangleKind.Acute)]
@@ -169,7 +378,7 @@ public class TriangleOperationsTests
     [InlineData(13, 12, 5, TriangleKind.Right)]
     [InlineData(5, 13, 12, TriangleKind.Right)]
     [InlineData(5, 12, 13, TriangleKind.Right)]
-    public void GetTriangleKind_Integer_WhenTriangularSidesAndPrecisionAreCorrectOnes_ReturnCorrectKind(
+    public void GetTriangleKind_Integer_WhenTriangleSidesAndPrecisionAreCorrectOnes_ReturnCorrectKind(
         int side1,
         int side2,
         int side3,

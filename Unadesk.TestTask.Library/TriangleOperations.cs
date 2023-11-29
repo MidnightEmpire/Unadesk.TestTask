@@ -30,10 +30,10 @@ public static class TriangleOperations
     ) {
         const double maxPrecision = 0.0;
 
-        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(precision, maxPrecision, nameof(precision));
-        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(side1, maxPrecision, nameof(side1));
-        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(side2, maxPrecision, nameof(side2));
-        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(side3, maxPrecision, nameof(side3));
+        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(precision, maxPrecision, nameof(precision));
+        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(side1, maxPrecision, nameof(side1));
+        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(side2, maxPrecision, nameof(side2));
+        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(side3, maxPrecision, nameof(side3));
 
         var negativePrecision = -precision;
 
@@ -82,10 +82,10 @@ public static class TriangleOperations
     ) {
         const decimal maxPrecision = 0m;
 
-        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(precision, maxPrecision, nameof(precision));
-        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(side1, maxPrecision, nameof(side1));
-        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(side2, maxPrecision, nameof(side2));
-        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(side3, maxPrecision, nameof(side3));
+        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(precision, maxPrecision, nameof(precision));
+        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(side1, maxPrecision, nameof(side1));
+        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(side2, maxPrecision, nameof(side2));
+        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(side3, maxPrecision, nameof(side3));
 
         var negativePrecision = -precision;
 
@@ -132,9 +132,9 @@ public static class TriangleOperations
     ) {
         const int zero = 0;
 
-        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(side1, zero, nameof(side1));
-        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(side2, zero, nameof(side2));
-        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(side3, zero, nameof(side3));
+        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(side1, zero, nameof(side1));
+        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(side2, zero, nameof(side2));
+        ThrowHelper.ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(side3, zero, nameof(side3));
 
         ThrowHelper.ThrowsInvalidArgumentExceptionIfTriangleInequalityIsNotMatched(side1, side2, side3);
 

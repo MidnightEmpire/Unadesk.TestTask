@@ -14,21 +14,21 @@ internal static class ThrowHelper
 {
     /// <summary>
     /// <see cref="ArgumentOutOfRangeException">ArgumentOutOfRangeException</see> throwing method, if argument is less
-    /// than the specified value.
+    /// than or equals the specified value.
     /// </summary>
     /// <param name="argument">Argument value to check.</param>
     /// <param name="value">Argument specified value to check.</param>
     /// <param name="argumentName">Argument/parameter name to substitute.</param>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// Throws, if specified <paramref name="argument" /> is less than thew specified <paramref name="value" />.
+    /// Throws, if specified <paramref name="argument" /> is less than or equals the specified <paramref name="value" />.
     /// </exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(
+    public static void ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(
         double argument,
         double value,
         string argumentName
     ) {
-        if (argument < value)
+        if (argument <= value)
         {
             throw new ArgumentOutOfRangeException(argumentName);
         }
@@ -36,21 +36,21 @@ internal static class ThrowHelper
 
     /// <summary>
     /// <see cref="ArgumentOutOfRangeException">ArgumentOutOfRangeException</see> throwing method, if argument is less
-    /// than the specified value.
+    /// than or equals the specified value.
     /// </summary>
     /// <param name="argument">Argument value to check.</param>
     /// <param name="value">Argument specified value to check.</param>
     /// <param name="argumentName">Argument/parameter name to substitute.</param>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// Throws, if specified <paramref name="argument" /> is less than thew specified <paramref name="value" />.
+    /// Throws, if specified <paramref name="argument" /> is less than or equals the specified <paramref name="value" />.
     /// </exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(
+    public static void ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(
         decimal argument,
         decimal value,
         string argumentName
     ) {
-        if (argument < value)
+        if (argument <= value)
         {
             throw new ArgumentOutOfRangeException(argumentName);
         }
@@ -58,21 +58,21 @@ internal static class ThrowHelper
 
     /// <summary>
     /// <see cref="ArgumentOutOfRangeException">ArgumentOutOfRangeException</see> throwing method, if argument is less
-    /// than the specified value.
+    /// than or equals the specified value.
     /// </summary>
     /// <param name="argument">Argument value to check.</param>
     /// <param name="value">Argument specified value to check.</param>
     /// <param name="argumentName">Argument/parameter name to substitute.</param>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// Throws, if specified <paramref name="argument" /> is less than thew specified <paramref name="value" />.
+    /// Throws, if specified <paramref name="argument" /> is less than or equals the specified <paramref name="value" />.
     /// </exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanValue(
+    public static void ThrowsArgumentOutOfRangeExceptionIfArgumentIsLessThanOrEqualsValue(
         int argument,
         int value,
         string argumentName
     ) {
-        if (argument < value)
+        if (argument <= value)
         {
             throw new ArgumentOutOfRangeException(argumentName);
         }
