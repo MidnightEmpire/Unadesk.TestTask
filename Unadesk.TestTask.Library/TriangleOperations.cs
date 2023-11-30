@@ -47,13 +47,6 @@ public static class TriangleOperations
         var condition2 = side1Square + side3Square - side2Square;
         var condition3 = side2Square + side3Square - side1Square;
 
-        if (condition1 >= negativePrecision && condition1 <= precision ||
-            condition2 >= negativePrecision && condition2 <= precision ||
-            condition3 >= negativePrecision && condition3 <= precision
-        ) {
-            return TriangleKind.Right;
-        }
-
         if (condition1 < negativePrecision ||
             condition2 < negativePrecision ||
             condition3 < negativePrecision
@@ -61,7 +54,14 @@ public static class TriangleOperations
             return TriangleKind.Obtuse;
         }
 
-        return TriangleKind.Acute;
+        if (condition1 > precision &&
+            condition2 > precision &&
+            condition3 > precision
+        ) {
+            return TriangleKind.Acute;
+        }
+
+        return TriangleKind.Right;
     }
 
     /// <summary>
@@ -99,13 +99,6 @@ public static class TriangleOperations
         var condition2 = side1Square + side3Square - side2Square;
         var condition3 = side2Square + side3Square - side1Square;
 
-        if (condition1 >= negativePrecision && condition1 <= precision ||
-            condition2 >= negativePrecision && condition2 <= precision ||
-            condition3 >= negativePrecision && condition3 <= precision
-        ) {
-            return TriangleKind.Right;
-        }
-
         if (condition1 < negativePrecision ||
             condition2 < negativePrecision ||
             condition3 < negativePrecision
@@ -113,7 +106,14 @@ public static class TriangleOperations
             return TriangleKind.Obtuse;
         }
 
-        return TriangleKind.Acute;
+        if (condition1 > precision &&
+            condition2 > precision &&
+            condition3 > precision
+        ) {
+            return TriangleKind.Acute;
+        }
+
+        return TriangleKind.Right;
     }
 
     /// <summary>
